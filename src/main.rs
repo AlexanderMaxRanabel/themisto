@@ -1,8 +1,9 @@
 use colored::*;
 use std::{env, process};
 
-mod parser;
 mod mem_manage;
+mod mov;
+mod parser;
 mod them_runtime;
 mod them_tokenizer;
 
