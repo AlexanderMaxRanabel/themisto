@@ -2,7 +2,6 @@ use crate::{them_runtime, them_tokenizer};
 use std::{
     fs::File,
     io::{BufRead, BufReader},
-    process,
 };
 
 pub fn parser(file: String, mut stack: Vec<String>, mut heap: Vec<String>) -> anyhow::Result<()> {

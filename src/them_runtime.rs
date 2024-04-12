@@ -31,13 +31,28 @@ pub fn themisto_runtime(
             heap = mem_manage::reset_heap(heap);
         }
 
-        "mov_stack" => {
-            let name_var = tokens.get(1).unwrap();
-            let type_of_value = tokens.get(2).unwrap();
-            let value = tokens.get(3).unwrap();
-
+        "mov" => {
+            let mov_target = tokens.get(1).unwrap();
+            let (name_var, type_of_value, value) = (tokens.get(2).unwrap(), tokens.get(3).unwrap(), tokens.get(4).unwrap());
+            
             let metadata = format!("{}.{}.{}", name_var, value, type_of_value);
-            stack.push(metadata);
+            match mov_target.as_str() {
+                "vm.stack" => {
+                    stack.push(metadata);
+                }
+
+                "vm.heap" => {
+                    let non_usize_cell = tokens.get(5).unwrap().to_string();
+                    let cell: usize = non_usize_cell.parse().expect("Failed to parse");
+
+                    heap[cell] = metadata;
+                }
+
+                _ => {
+                    println!("{}: Unknown in-mem vector: {}", "Error".red(), mov_target);   
+                    process::exit(1);
+                }
+            }
         }
 
         _ => {
