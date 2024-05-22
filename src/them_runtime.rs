@@ -1,4 +1,4 @@
-use crate::{mem_manage, mov};
+use crate::{mem_manage, mov, printline};
 use colored::*;
 use std::process;
 
@@ -18,7 +18,7 @@ pub fn themisto_runtime(
                 std::process::exit(1);
             });
 
-        let range: usize = non_usize_range.parse().expect("Couldnt parse");
+            let range: usize = non_usize_range.parse().expect("Couldnt parse");
 
             heap.resize(range, "".to_string());
         }
@@ -36,7 +36,7 @@ pub fn themisto_runtime(
         }
 
         "printline" => {
-            
+            (stack, heap) = printline::println(tokens, stack, heap);
         }
 
         "pop_stack" => {

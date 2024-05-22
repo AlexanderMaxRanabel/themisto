@@ -16,7 +16,7 @@ pub fn parser(file: String, mut stack: Vec<String>, mut heap: Vec<String>) -> an
         });
 
         (stack, heap) = them_runtime::themisto_runtime(main_keyword, tokens, stack, heap);
-    } 
+    }
 
     Ok(())
 }

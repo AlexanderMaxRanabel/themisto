@@ -19,5 +19,3 @@ pub fn pop_heap(mut heap: Vec<String>) -> Vec<String> {
     heap.pop();
     return heap;
 }
-
-
