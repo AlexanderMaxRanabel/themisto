@@ -18,7 +18,7 @@ pub fn themisto_runtime(
                 std::process::exit(1);
             });
 
-            let range: usize = non_usize_range.parse().expect("Couldnt parse");
+        let range: usize = non_usize_range.parse().expect("Couldnt parse");
 
             heap.resize(range, "".to_string());
         }
@@ -33,6 +33,18 @@ pub fn themisto_runtime(
 
         "mov" => {
             (stack, heap) = mov::mov(tokens, stack, heap);
+        }
+
+        "printline" => {
+            
+        }
+
+        "pop_stack" => {
+            stack = mem_manage::pop_stack(stack);
+        }
+
+        "pop_heap" => {
+            heap = mem_manage::pop_heap(heap);
         }
 
         _ => {

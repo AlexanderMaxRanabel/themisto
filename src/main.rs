@@ -6,6 +6,8 @@ mod mov;
 mod parser;
 mod them_runtime;
 mod them_tokenizer;
+mod printline;
+mod opcodes;
 
 fn main() -> anyhow::Result<()> {
     let args: Vec<String> = env::args().collect();
