@@ -3,11 +3,11 @@ use std::{env, process};
 
 mod mem_manage;
 mod mov;
-mod opcodes;
 mod parser;
 mod printline;
 mod them_runtime;
 mod them_tokenizer;
+mod math_utils;
 
 fn main() -> anyhow::Result<()> {
     let args: Vec<String> = env::args().collect();
