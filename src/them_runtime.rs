@@ -1,4 +1,4 @@
-use crate::{mem_manage, mov, printline};
+use crate::{mem_manage, mov, printline, debug};
 use colored::*;
 use std::process;
 
@@ -45,6 +45,10 @@ pub fn themisto_runtime(
 
         "pop_heap" => {
             heap = mem_manage::pop_heap(heap);
+        }
+
+        "dumpstate" => {
+            
         }
 
         _ => {

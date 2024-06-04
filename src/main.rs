@@ -8,6 +8,7 @@ mod printline;
 mod them_runtime;
 mod them_tokenizer;
 mod math_utils;
+mod debug;
 
 fn main() -> anyhow::Result<()> {
     let args: Vec<String> = env::args().collect();
