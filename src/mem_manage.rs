@@ -19,3 +19,7 @@ pub fn pop_heap(mut heap: Vec<String>) -> Vec<String> {
     heap.pop();
     return heap;
 }
+
+/*pub fn push_stack(mut stack: Vec<String>, variable_name) -> Vec<String> {
+    return stack
+}*/

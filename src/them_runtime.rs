@@ -1,10 +1,13 @@
-use crate::{mem_manage, mov, printline, debug};
+use crate::{mem_manage, mov, printline};
 use colored::*;
 use std::process;
+
+#[allow(unused_assignments)]
 
 pub fn themisto_runtime(
     main_keyword: String,
     tokens: Vec<String>,
+    args_list: Vec<String>,
     mut stack: Vec<String>,
     mut heap: Vec<String>,
 ) -> (Vec<String>, Vec<String>) {
@@ -32,7 +35,7 @@ pub fn themisto_runtime(
         }
 
         "mov" => {
-            (stack, heap) = mov::mov(tokens, stack, heap);
+            (stack, heap) = mov::mov(args_list, stack, heap);
         }
 
         "printline" => {
@@ -47,15 +50,11 @@ pub fn themisto_runtime(
             heap = mem_manage::pop_heap(heap);
         }
 
-        "dumpstate" => {
-            
-        }
-
         _ => {
             println!("{}: Unknown keyword: {}", "Error".red(), main_keyword);
             process::exit(1);
         }
     }
-
+    
     (stack, heap)
 }

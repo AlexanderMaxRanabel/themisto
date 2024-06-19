@@ -15,7 +15,9 @@ pub fn parser(file: String, mut stack: Vec<String>, mut heap: Vec<String>) -> an
             std::process::exit(1);
         });
 
-        (stack, heap) = them_runtime::themisto_runtime(main_keyword, tokens, stack, heap);
+        let args_list = them_tokenizer::double_tokenizer(tokens.clone(), "(", ")");
+
+        (stack, heap) = them_runtime::themisto_runtime(main_keyword, tokens, args_list, stack, heap);
     }
 
     Ok(())

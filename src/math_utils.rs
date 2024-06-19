@@ -1,8 +1,8 @@
 extern crate regex;
 
+use crate::them_tokenizer;
 use colored::*;
 use regex::Regex;
-use crate::them_tokenizer;
 
 pub fn equation_restructure(mut expr: String, stack: Vec<String>, heap: Vec<String>) -> String {
     let stack_re = Regex::new(r"stack\((\d+)\)").unwrap();
@@ -31,34 +31,38 @@ pub fn equation_restructure(mut expr: String, stack: Vec<String>, heap: Vec<Stri
     let (mut stack_indicator, mut heap_indicator) = (0, 0);
 
     for token in expr_tokens {
-        if token.starts_with("stack(") && token.ends_with(")"){
+        if token.starts_with("stack(") && token.ends_with(")") {
             stack_indicator += 1;
-            let stack_metadata = stack.get(stack_indicator - 1 as usize).cloned().unwrap_or_else(|| {
-                println!("{}: No Stack Value found", "Error".red());
-                std::process::exit(1)
-            });
-            
+            let stack_metadata = stack
+                .get(stack_indicator - 1 as usize)
+                .cloned()
+                .unwrap_or_else(|| {
+                    println!("{}: No Stack Value found", "Error".red());
+                    std::process::exit(1)
+                });
+
             let stack_parts: Vec<&str> = stack_metadata.split('.').collect();
             let stack_value = stack_parts.get(1).cloned().unwrap();
 
             expr = expr.replace(token.as_str(), stack_value);
-
         } else if token.starts_with("heap(") && token.ends_with(")") {
             heap_indicator += 1;
 
-            let heap_metadata = heap.get(heap_indicator - 1 as usize).cloned().unwrap_or_else(|| {
-                println!("{}: No Heap Value found", "Error".red());
-                std::process::exit(1)
-            });
+            let heap_metadata = heap
+                .get(heap_indicator - 1 as usize)
+                .cloned()
+                .unwrap_or_else(|| {
+                    println!("{}: No Heap Value found", "Error".red());
+                    std::process::exit(1)
+                });
 
             let heap_parts: Vec<&str> = heap_metadata.split('.').collect();
             let heap_value = heap_parts.get(1).cloned().unwrap();
 
             expr = expr.replace(token.as_str(), heap_value);
-
         } else {
             continue;
-        } 
+        }
     }
 
     return expr;

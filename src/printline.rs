@@ -14,7 +14,8 @@ pub fn println(
     } else {
         if let Some(first_token) = tokens.get(0) {
             if let Ok(_number) = first_token.parse::<i64>() {
-                let edited_full_str = math_utils::equation_restructure(full_str, stack.clone(), heap.clone());
+                let edited_full_str =
+                    math_utils::equation_restructure(full_str, stack.clone(), heap.clone());
                 match eval(edited_full_str.as_str()) {
                     Ok(result) => println!("{}", result),
                     Err(e) => println!("Failed to evaluate expression: {}", e),
