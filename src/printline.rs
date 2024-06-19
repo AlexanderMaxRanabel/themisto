@@ -3,16 +3,15 @@ use colored::*;
 use evalexpr::*;
 
 pub fn println(
-    mut tokens: Vec<String>,
+    args_list: Vec<String>,
     stack: Vec<String>,
     heap: Vec<String>,
 ) -> (Vec<String>, Vec<String>) {
-    tokens.remove(0);
-    let full_str = tokens.join(" ");
+    let full_str = args_list.join(" ");
     if full_str.starts_with("'") && full_str.ends_with("'") {
         println!("{}", full_str);
     } else {
-        if let Some(first_token) = tokens.get(0) {
+        if let Some(first_token) = args_list.get(0) {
             if let Ok(_number) = first_token.parse::<i64>() {
                 let edited_full_str =
                     math_utils::equation_restructure(full_str, stack.clone(), heap.clone());
@@ -21,7 +20,7 @@ pub fn println(
                     Err(e) => println!("Failed to evaluate expression: {}", e),
                 }
             } else {
-                if let Some(second_token) = tokens.get(1) {
+                if let Some(second_token) = args_list.get(1) {
                     if let Ok(number) = second_token.parse::<usize>() {
                         match first_token.as_str() {
                             "stack" => {

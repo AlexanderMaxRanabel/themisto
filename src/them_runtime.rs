@@ -35,11 +35,11 @@ pub fn themisto_runtime(
         }
 
         "mov" => {
-            (stack, heap) = mov::mov(args_list, stack, heap);
+            (stack, heap) = mov::mov(tokens, stack, heap);
         }
 
         "printline" => {
-            (stack, heap) = printline::println(tokens, stack, heap);
+            (stack, heap) = printline::println(args_list, stack, heap);
         }
 
         "pop_stack" => {

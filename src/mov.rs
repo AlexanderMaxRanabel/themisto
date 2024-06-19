@@ -2,18 +2,20 @@ use colored::*;
 use std::process;
 
 pub fn mov(
-    args_list: Vec<String>,
+    tokens: Vec<String>,
     mut stack: Vec<String>,
     mut heap: Vec<String>,
 ) -> (Vec<String>, Vec<String>) {
-    //mov x :: int 12 1x0auto | stack
-    //mov x :: int 12 2x034
+    //mov x :: int 12 stack
+    //mov x :: int 12 2x34 (example)
+    
     let (name_var, type_of_value, value, location) = (
-        args_list.get(0).unwrap(),
-        args_list.get(2).unwrap(),
-        args_list.get(3).unwrap(),
-        args_list.get(4).unwrap(),
+        tokens.get(1).unwrap(),
+        tokens.get(3).unwrap(),
+        tokens.get(4).unwrap(),
+        tokens.get(5).unwrap(),
     );
+
 
     let metadata = format!("{}.{}.{}", name_var, value, type_of_value);
 
